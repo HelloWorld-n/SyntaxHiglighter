@@ -1,0 +1,18 @@
+{
+    colorBackground: 0xDDDDEE,
+    colorBackgroundPressed: 0xAAAADD,
+    colorForeground: 0x444455,
+    colorText: 0x444444,
+    colorComment: 0x888888,
+    colorCommentEscape:0x7766FF,
+    colorString: 0x44DD44,
+    colorStringEscape: 0x7766FF,
+    colorNumber: 0xEE8800,
+    colorBoolean: 0xEE8800,
+    colorBuiltinType: 0xCCCC44,
+    colorType: 0xCCCC44,
+    colorVariable: 0xDD5555,
+    colorFunction: 0x22AAFF,
+    colorKeyword: 0x9955FF,
+    colorPreprocessor: 0x9955FF,
+}
