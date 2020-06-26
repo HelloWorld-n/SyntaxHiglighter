@@ -1,5 +1,5 @@
 ### Original Syntax highlighter for ShapedLikeItSelf_script
-current_version: `0.8`\
+current_version: 0.9\
 extension: `.slis`
 
 Known bugs:

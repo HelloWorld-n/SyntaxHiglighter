@@ -122,7 +122,6 @@ public class Main {
                 int returnVal = fc.showDialog(frame,"Set theme");
                 File file = fc.getSelectedFile();
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    System.out.println(file.getAbsolutePath());
                     text = Files.readString(Paths.get(file.getAbsolutePath()));
                     loadTheme(text);
                 }
@@ -139,14 +138,14 @@ public class Main {
 
 
     public static void loadTheme(Map<String, Object> mapTheme){
-        if(mapTheme.containsKey("colorBackground")) {
-            colorBackground = new Color(Integer.parseInt(mapTheme.get("colorBackground").toString()));
+        if(mapTheme.containsKey("Background")) {
+            colorBackground = new Color(Integer.parseInt(mapTheme.get("Background").toString()));
         }
-        if(mapTheme.containsKey("colorBackgroundPressed")) {
-            colorBackgroundPressed = new Color(Integer.parseInt(mapTheme.get("colorBackgroundPressed").toString()));
+        if(mapTheme.containsKey("BackgroundPressed")) {
+            colorBackgroundPressed = new Color(Integer.parseInt(mapTheme.get("BackgroundPressed").toString()));
         }
-        if(mapTheme.containsKey("colorForeground")) {
-            colorForeground = new Color(Integer.parseInt(mapTheme.get("colorForeground").toString()));
+        if(mapTheme.containsKey("Foreground")) {
+            colorForeground = new Color(Integer.parseInt(mapTheme.get("Foreground").toString()));
         }
         initializeElements();
     }
@@ -159,7 +158,6 @@ public class Main {
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        System.out.println(stringTheme);
         loadTheme(stringTheme);
     }
 

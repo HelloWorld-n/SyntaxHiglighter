@@ -10,25 +10,14 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SyntaxHighlighter {
     private static final String formatText = "<html><style>body{color:#EEEEEE;margin-left: 10px}  .comment {\n    color: #888888;\n}\n\n.escape {\n    color: #7766FF;\n}\n\n.string {\n    color: #44DD44;\n}\n\n\n\n\n\n.number {\n    color: #EE8800;\n}\n\n.boolean {\n    color: #EE8800;\n}\n\n.builtin-type {\n    color: #CCCC44;\n}\n\n.type {\n    color: #CCCC44;\n}\n\n.variable {\n    color: #DD5555;\n}\n\n.function {\n    color: #22AAFF;\n}\n\n.keyword {\n    color: #9955CC;\n}\n\n</style><body>";
 
-    private Color colorText = new Color(0xEEEEEE);
-    private Color colorComment = new Color(0x888888);
-    private Color colorCommentEscape = new Color(0x7766FF);
-    private Color colorString = new Color(0x44DD44);
-    private Color colorStringEscape = new Color(0x7766FF);
-    private Color colorNumber = new Color(0xEE8800);
-    private Color colorBoolean = new Color(0xEE8800);
-    private Color colorBuiltinType = new Color(0xCCCC44);
-    private Color colorType = new Color(0xCCCC44);
-    private Color colorVariable = new Color(0xDD5555);
-    private Color colorFunction = new Color(0x22AAFF);
-    private Color colorKeyword = new Color(0x9955FF);
-    private Color colorPreprocessor = new Color(0x9955FF);
-
+    private Map<String, Object> colors = new HashMap<>();
+    private Map<String, Style> styles = new HashMap<>();
     private final StyleContext sc = new StyleContext();
 
     private int tabSize = 4;
@@ -39,34 +28,17 @@ public class SyntaxHighlighter {
         this.tabString = " ".repeat(tabSize);
     }
 
-
-
     public int getTabSize() {
         return tabSize;
     }
-
-    private final Style styleText = sc.addStyle("text", null);
-    private final Style styleComment = sc.addStyle("comment", styleText);
-    private final Style styleCommentEscape = sc.addStyle("commentEscape", styleComment);
-    private final Style styleString = sc.addStyle("string", styleText);
-    private final Style styleStringEscape = sc.addStyle("stringEscape", styleString);
-    private final Style styleNumber = sc.addStyle("number", styleText);
-    private final Style styleBoolean = sc.addStyle("boolean", styleText);
-    private final Style styleType = sc.addStyle("type", styleText);
-    private final Style styleBuiltinType = sc.addStyle("builtinType", styleText);
-    private final Style styleVariable = sc.addStyle("variable", styleText);
-    private final Style styleFunction = sc.addStyle("function", styleText);
-    private final Style styleKeyword = sc.addStyle("keyword", styleText);
-    private final Style stylePreprocessor = sc.addStyle("preprocessor", styleText);
-
-
-
-
 
     private final JTextPane textPane;
     private final Caret caret;
 
     public SyntaxHighlighter(JTextPane textPane) {
+        for(String item: colorItems){
+            sc.addStyle(item, null);
+        }
         this.textPane = textPane;
         textPane.setCaretColor(new Color(0xBBCCCC));
         this.caret = this.textPane.getCaret();
@@ -106,20 +78,33 @@ public class SyntaxHighlighter {
         styleizeColors();
     }
 
+    private String[] colorItems = new String[]{
+            "Text","Comment","CommentEscape","String","StringEscape",
+            "Boolean","Number","Function","Type","BuiltinType",
+            "Variable","Keyword","Preprocessor",
+    };
+
+    String[] endings = new String[]{"Escape"};
+
     protected void styleizeColors(){
-        this.styleText.addAttribute(StyleConstants.Foreground, this.colorText);
-        this.styleComment.addAttribute(StyleConstants.Foreground, this.colorComment);
-        this.styleCommentEscape.addAttribute(StyleConstants.Foreground, this.colorCommentEscape);
-        this.styleString.addAttribute(StyleConstants.Foreground, this.colorString);
-        this.styleStringEscape.addAttribute(StyleConstants.Foreground, this.colorStringEscape);
-        this.styleBoolean.addAttribute(StyleConstants.Foreground, this.colorBoolean);
-        this.styleNumber.addAttribute(StyleConstants.Foreground, this.colorNumber);
-        this.styleFunction.addAttribute(StyleConstants.Foreground, this.colorFunction);
-        this.styleType.addAttribute(StyleConstants.Foreground, this.colorType);
-        this.styleBuiltinType.addAttribute(StyleConstants.Foreground, this.colorBuiltinType);
-        this.styleVariable.addAttribute(StyleConstants.Foreground, this.colorVariable);
-        this.styleKeyword.addAttribute(StyleConstants.Foreground, this.colorKeyword);
-        this.stylePreprocessor.addAttribute(StyleConstants.Foreground, this.colorPreprocessor);
+        for(String item : colorItems) {
+            if(colors.containsKey(item)){
+                sc.getStyle(item).addAttribute(StyleConstants.Foreground, colors.get(item));
+                styles.put(item,sc.getStyle(item));
+            }else if(item.equals("Text")){
+                sc.getStyle(item).addAttribute(StyleConstants.Foreground, Main.colorForeground);
+                styles.put(item, sc.getStyle(item));
+            }else{
+                for (String ending : endings) {
+                    if (item.endsWith(ending)) {
+                        styles.put(item, sc.addStyle(
+                                item,
+                                styles.get(item.substring(0, item.length() - ending.length()))
+                        ));
+                    }
+                }
+            }
+        }
     }
 
     private int pos;
@@ -127,70 +112,24 @@ public class SyntaxHighlighter {
     private final Document doc;
 
     public void loadTheme(Map<String, Object> mapTheme){
-        if(mapTheme.containsKey("colorText")){
-            colorText = new Color(Integer.parseInt(mapTheme.get("colorText").toString()));
-        }else{
-            colorText = Main.colorForeground;
-        }
-        if(mapTheme.containsKey("colorComment")){
-            colorComment = new Color(Integer.parseInt(mapTheme.get("colorComment").toString()));
-        }else{
-            colorComment = colorText;
-        }
-        if(mapTheme.containsKey("colorCommentEscape")){
-            colorCommentEscape = new Color(Integer.parseInt(mapTheme.get("colorCommentEscape").toString()));
-        }else{
-            colorCommentEscape = colorComment;
-        }
-        if(mapTheme.containsKey("colorString")){
-            colorString = new Color(Integer.parseInt(mapTheme.get("colorString").toString()));
-        }else{
-            colorString = colorText;
-        }
-        if(mapTheme.containsKey("colorStringEscape")){
-            colorStringEscape = new Color(Integer.parseInt(mapTheme.get("colorStringEscape").toString()));
-        }else{
-            colorStringEscape = colorString;
-        }
-        if(mapTheme.containsKey("colorNumber")){
-            colorNumber = new Color(Integer.parseInt(mapTheme.get("colorNumber").toString()));
-        }else{
-            colorNumber = colorText;
-        }
-        if(mapTheme.containsKey("colorBoolean")){
-            colorBoolean = new Color(Integer.parseInt(mapTheme.get("colorBoolean").toString()));
-        }else{
-            colorBoolean = colorText;
-        }
-        if(mapTheme.containsKey("colorType")){
-            colorType = new Color(Integer.parseInt(mapTheme.get("colorType").toString()));
-        }else{
-            colorType = colorText;
-        }
-        if(mapTheme.containsKey("colorBuiltinType")){
-            colorBuiltinType = new Color(Integer.parseInt(mapTheme.get("colorBuiltinType").toString()));
-        }else{
-            colorBuiltinType = colorType;
-        }
-        if(mapTheme.containsKey("colorVariable")){
-            colorVariable = new Color(Integer.parseInt(mapTheme.get("colorVariable").toString()));
-        }else{
-            colorVariable = colorText;
-        }
-        if(mapTheme.containsKey("colorFunction")){
-            colorFunction = new Color(Integer.parseInt(mapTheme.get("colorFunction").toString()));
-        }else{
-            colorFunction = colorText;
-        }
-        if(mapTheme.containsKey("colorKeyword")){
-            colorKeyword = new Color(Integer.parseInt(mapTheme.get("colorKeyword").toString()));
-        }else{
-            colorKeyword = colorText;
-        }
-        if(mapTheme.containsKey("colorPreprocessor")){
-            colorPreprocessor = new Color(Integer.parseInt(mapTheme.get("colorPreprocessor").toString()));
-        }else{
-            colorPreprocessor = colorText;
+        for(String item: colorItems) {
+            if (mapTheme.containsKey(item)) {
+                colors.put(item, new Color(Integer.parseInt(mapTheme.get(item).toString())));
+            } else {
+                boolean isPuted = false;
+                for (String ending:endings) {
+                    if (item.endsWith(ending)) {
+                        colors.put(item, colors.get(
+                                item.substring(0, item.length() - ending.length())
+                        ));
+                        isPuted = true;
+                        break;
+                    }
+                }
+                if(!isPuted){
+                    colors.put(item, Main.colorForeground);
+                }
+            }
         }
         styleizeColors();
         try {
@@ -293,68 +232,68 @@ public class SyntaxHighlighter {
                 // strings
                 // TODO: If editing this, edit in {strings alternative}
                 if (this.text.charAt(pos) == '"') {
-                    documentInsertNextChar(styleString);
+                    documentInsertNextChar(styles.get("String"));
                     while ((this.text.charAt(pos) != '"')) {
                         while (this.text.charAt(pos) == '\\') {
-                            documentInsertNextChar(styleStringEscape);
-                            documentInsertNextChar(styleStringEscape);
+                            documentInsertNextChar(styles.get("StringEscape"));
+                            documentInsertNextChar(styles.get("StringEscape"));
                         }
                         if (this.text.charAt(pos) != '"') {
-                            documentInsertNextChar(styleString);
+                            documentInsertNextChar(styles.get("String"));
                         }
                     }
-                    documentInsertNextChar(styleString);
+                    documentInsertNextChar(styles.get("String"));
                     continue testValues;
                 }
                 // strings alternative
                 if (this.text.charAt(pos) == '`') {
-                    documentInsertNextChar(styleString);
+                    documentInsertNextChar(styles.get("String"));
                     while ((this.text.charAt(pos) != '`')) {
                         while ((this.text.charAt(pos) == '\\')
                                 || (this.text.charAt(pos) == '$')
                                 && (this.text.charAt(pos + 1) == '{')) {
                             if (this.text.charAt(pos) == '\\') {
-                                documentInsertNextChar(styleStringEscape);
-                                documentInsertNextChar(styleStringEscape);
+                                documentInsertNextChar(styles.get("StringEscape"));
+                                documentInsertNextChar(styles.get("StringEscape"));
                             }
                             if (this.text.charAt(pos) == '$') {
 
                                 while (this.text.charAt(pos) != '}') {
 
-                                    documentInsertNextChar(styleVariable);
+                                    documentInsertNextChar(styles.get("Variable"));
                                 }
-                                documentInsertNextChar(styleVariable);
+                                documentInsertNextChar(styles.get("Variable"));
                             }
                             if (this.text.charAt(pos) == '`') {
-                                documentInsertNextChar(styleString);
+                                documentInsertNextChar(styles.get("String"));
                                 continue testValues;
                             }
                         }
                         if (this.text.charAt(pos) != '`') {
-                            documentInsertNextChar(styleString);
+                            documentInsertNextChar(styles.get("String"));
                         }
 
                     }
-                    documentInsertNextChar(styleString);
+                    documentInsertNextChar(styles.get("String"));
                     continue testValues;
                 }
 
                 // comments
                 if ((this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '*')) {
 
-                    documentInsertNextChar(styleComment);
+                    documentInsertNextChar(styles.get("Comment"));
                     while (!((this.text.charAt(pos - 1) == '*') && (this.text.charAt(pos) == '/'))) {
 
-                        documentInsertNextChar(styleComment);
+                        documentInsertNextChar(styles.get("Comment"));
                     }
-                    documentInsertNextChar(styleComment);
+                    documentInsertNextChar(styles.get("Comment"));
                     continue testValues;
                 }
                 if ((this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '/')) {
 
-                    documentInsertNextChar(styleComment);
+                    documentInsertNextChar(styles.get("Comment"));
                     while (this.text.charAt(pos) != '\n') {
-                        documentInsertNextChar(styleComment);
+                        documentInsertNextChar(styles.get("Comment"));
                     }
                     continue testValues;
                 }
@@ -365,9 +304,9 @@ public class SyntaxHighlighter {
                         if (!Character.isLetter(afterEnd) && !Character.isDigit(afterEnd) &&
                                 afterEnd != '_' && afterEnd != '\'') {
                             if (Arrays.asList(slisBoolValues).contains(item)) {
-                                doc.insertString(pos, item, styleBoolean);
+                                doc.insertString(pos, item, styles.get("Boolean"));
                             }else {
-                                doc.insertString(pos, item, styleKeyword);
+                                doc.insertString(pos, item, styles.get("Keyword"));
                             }
                             pos += item.length();
                             if (Arrays.asList(slisClassDeterminators).contains(item)) {
@@ -377,7 +316,7 @@ public class SyntaxHighlighter {
                                         || (this.text.charAt(pos) == '_')
                                         || (this.text.charAt(pos) == ' ')
                                         || (this.text.charAt(pos) == '\'')) {
-                                    documentInsertNextChar(styleType);
+                                    documentInsertNextChar(styles.get("Type"));
                                 }
                             }
                         }
@@ -386,88 +325,88 @@ public class SyntaxHighlighter {
                 // numbers
 
                 if (Character.isDigit(this.text.charAt(pos))) {
-                    documentInsertNextChar(styleNumber);
+                    documentInsertNextChar(styles.get("Number"));
                     if (Character.isDigit(this.text.charAt(pos)) || this.text.charAt(pos) == '.') {
                         // base 10
                         while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                         }
 
                         if (this.text.charAt(pos) == '.') {
                             if (Character.isDigit(this.text.charAt(pos + 1))) {
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                                 while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                                    documentInsertNextChar(styleNumber);
+                                    documentInsertNextChar(styles.get("Number"));
                                 }
                             }
                         }
                         if (this.text.charAt(pos) == 'e') {
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                             while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                             }
                         }
                         continue testValues;
                     } else if (this.text.charAt(pos) == 'x') {
 
                         // // base 16
-                        documentInsertNextChar(styleNumber);
+                        documentInsertNextChar(styles.get("Number"));
                         while (String.valueOf(this.text.charAt(pos)).matches("[0-9A-F_']")) {
 
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                         }
                         if (this.text.charAt(pos) == '.') {
                             if (Character.isDigit(this.text.charAt(pos + 1))) {
 
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                                 while (String.valueOf(this.text.charAt(pos)).matches("[0-9A-F_']")) {
 
-                                    documentInsertNextChar(styleNumber);
+                                    documentInsertNextChar(styles.get("Number"));
                                 }
                             }
                         }
                         if (this.text.charAt(pos) == 'e') {
 
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                             while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
 
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                             }
                         } else if (this.text.charAt(pos) == 'p') {
 
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                             while (String.valueOf(this.text.charAt(pos)).matches("[0-9A-F_']")) {
 
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                             }
                         }
                         continue testValues;
                     } else if (this.text.charAt(pos) == 'o') {
                         // // base 8
-                        documentInsertNextChar(styleNumber);
+                        documentInsertNextChar(styles.get("Number"));
 
                         while (String.valueOf(this.text.charAt(pos)).matches("[0-7_']")) {
 
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                         }
                         if (this.text.charAt(pos) == '.') {
                             if (Character.isDigit(this.text.charAt(pos + 1))) {
 
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                                 while (String.valueOf(this.text.charAt(pos)).matches("[0-7_']")) {
-                                    documentInsertNextChar(styleNumber);
+                                    documentInsertNextChar(styles.get("Number"));
                                 }
                             }
                         }
                         if (this.text.charAt(pos) == 'e') {
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                             while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                             }
                         } else if (this.text.charAt(pos) == 'p') {
-                            documentInsertNextChar(styleNumber);
+                            documentInsertNextChar(styles.get("Number"));
                             while (String.valueOf(this.text.charAt(pos)).matches("[0-7_']")) {
-                                documentInsertNextChar(styleNumber);
+                                documentInsertNextChar(styles.get("Number"));
                             }
                         }
                         continue testValues;
@@ -475,7 +414,7 @@ public class SyntaxHighlighter {
                 }
                 {
                     // variables
-                    Style style_temp;
+                    Style tempStyle;
                     if (((Character.isLetter(this.text.charAt(pos)))
                             || Character.isDigit(this.text.charAt(pos))
                             || (this.text.charAt(pos) == '_') || (this.text.charAt(pos) == '\''))) {
@@ -489,27 +428,27 @@ public class SyntaxHighlighter {
                                 x++;
                             }
                             if (this.text.charAt(pos + x) == '(') {
-                                style_temp = styleFunction;
+                                tempStyle = styles.get("Function");
                             } else {
-                                style_temp = styleVariable;
+                                tempStyle = styles.get("Variable");
                             }
                         }
                         while ((Character.isLetter(this.text.charAt(pos)))
                                 || Character.isDigit(this.text.charAt(pos))
                                 || (this.text.charAt(pos) == '_') || (this.text.charAt(pos) == '\'')) {
 
-                            documentInsertNextChar(style_temp);
+                            documentInsertNextChar(tempStyle);
                         }
                         continue testValues;
                     }
-                    documentInsertNextChar(styleText);
+                    documentInsertNextChar(styles.get("Text"));
                 }
             }
         } catch (Exception exception) {
             try {
 
                 while ( pos < this.text.length()) {
-                    documentInsertNextChar(styleText);
+                    documentInsertNextChar(styles.get("Text"));
                 }
             } catch (Exception ignoredException){}
         }

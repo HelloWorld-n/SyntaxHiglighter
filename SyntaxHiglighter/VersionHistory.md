@@ -1,3 +1,6 @@
+##version 0.9
+* **tweak** refacrored code
+
 ##version 0.8
 * **bugfix** theme rememberization being useless due to app never 
 using it for actually changing theme at initialization.

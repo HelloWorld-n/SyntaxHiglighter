@@ -497,10 +497,7 @@ class JsonParser {
     if (c >= 'A' && c <= 'F') {
       return true;
     }
-    if (c >= 'a' && c <= 'f') {
-      return true;
-    }
-    return false;
+      return c >= 'a' && c <= 'f';
   }
 
   /**
