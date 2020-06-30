@@ -1,3 +1,6 @@
+##version 0.11.0
+* **optimization**
+
 ##version 0.10.0
 * **tweak** version system made less confusing *(0.1 = 0.10, but version 0.1 ≠ version 0.10)*
 * **feature: theme** ChinolorLight
