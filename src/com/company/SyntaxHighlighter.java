@@ -108,6 +108,7 @@ public class SyntaxHighlighter {
     }
 
     private int pos;
+    private int partLenght;
     private String text = "";
     private final Document doc;
 
@@ -202,6 +203,17 @@ public class SyntaxHighlighter {
     }
 
 
+    private void documentInsertNextString(Style style) throws BadLocationException {
+        doc.insertString(
+                doc.getLength(),
+                this.text.substring(pos, pos + partLenght),
+                style);
+        pos += partLenght;
+    }
+
+    private int position(){
+        return pos + partLenght;
+    }
 
     public void toClipboardWithSyntaxHiglighting() {
         StringSelection selection = new StringSelection(this.textPane.getText());
@@ -253,16 +265,16 @@ public class SyntaxHighlighter {
                                 || (this.text.charAt(pos) == '$')
                                 && (this.text.charAt(pos + 1) == '{')) {
                             if (this.text.charAt(pos) == '\\') {
-                                documentInsertNextChar(styles.get("StringEscape"));
-                                documentInsertNextChar(styles.get("StringEscape"));
+                                partLenght = 2;
+                                documentInsertNextString(styles.get("StringEscape"));
                             }
                             if (this.text.charAt(pos) == '$') {
-
-                                while (this.text.charAt(pos) != '}') {
-
-                                    documentInsertNextChar(styles.get("Variable"));
+                                partLenght = 1;
+                                while (this.text.charAt(position()) != '}') {
+                                    partLenght++;
                                 }
-                                documentInsertNextChar(styles.get("Variable"));
+                                partLenght++;
+                                documentInsertNextString(styles.get("Variable"));
                             }
                             if (this.text.charAt(pos) == '`') {
                                 documentInsertNextChar(styles.get("String"));
@@ -280,21 +292,21 @@ public class SyntaxHighlighter {
 
                 // comments
                 if ((this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '*')) {
-
-                    documentInsertNextChar(styles.get("Comment"));
-                    while (!((this.text.charAt(pos - 1) == '*') && (this.text.charAt(pos) == '/'))) {
-
-                        documentInsertNextChar(styles.get("Comment"));
+                    partLenght = 1;
+                    while (!((this.text.charAt(position()-1) == '*') && (this.text.charAt(position()) == '/'))){
+                        partLenght ++;
                     }
-                    documentInsertNextChar(styles.get("Comment"));
+                    partLenght++;
+                    documentInsertNextString(styles.get("Comment"));
                     continue testValues;
                 }
                 if ((this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '/')) {
 
-                    documentInsertNextChar(styles.get("Comment"));
-                    while (this.text.charAt(pos) != '\n') {
-                        documentInsertNextChar(styles.get("Comment"));
+                    partLenght = 1;
+                    while (this.text.charAt(position()) != '\n') {
+                        partLenght++;
                     }
+                    documentInsertNextString(styles.get("Comment"));
                     continue testValues;
                 }
                 // keywords
@@ -325,90 +337,84 @@ public class SyntaxHighlighter {
                 // numbers
 
                 if (Character.isDigit(this.text.charAt(pos))) {
-                    documentInsertNextChar(styles.get("Number"));
-                    if (Character.isDigit(this.text.charAt(pos)) || this.text.charAt(pos) == '.') {
+                    partLenght = 1;
+                    if (Character.isDigit(this.text.charAt(position())) || this.text.charAt(position()) == '.') {
                         // base 10
-                        while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                            documentInsertNextChar(styles.get("Number"));
+                        while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
+                            partLenght++;
                         }
 
-                        if (this.text.charAt(pos) == '.') {
-                            if (Character.isDigit(this.text.charAt(pos + 1))) {
-                                documentInsertNextChar(styles.get("Number"));
-                                while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                                    documentInsertNextChar(styles.get("Number"));
+                        if (this.text.charAt(position()) == '.') {
+                            if (Character.isDigit(this.text.charAt(position() + 1))) {
+                                partLenght++;
+                                while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
+                                    partLenght++;
                                 }
                             }
                         }
                         if (this.text.charAt(pos) == 'e') {
-                            documentInsertNextChar(styles.get("Number"));
-                            while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                                documentInsertNextChar(styles.get("Number"));
+                            partLenght++;
+                            while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
+                                partLenght++;
                             }
                         }
+                        documentInsertNextString(styles.get("Number"));
                         continue testValues;
-                    } else if (this.text.charAt(pos) == 'x') {
+                    } else if (this.text.charAt(position()) == 'x') {
 
                         // // base 16
-                        documentInsertNextChar(styles.get("Number"));
-                        while (String.valueOf(this.text.charAt(pos)).matches("[0-9A-F_']")) {
-
-                            documentInsertNextChar(styles.get("Number"));
+                        partLenght=2;
+                        while (String.valueOf(this.text.charAt(position())).matches("[0-9A-F_']")) {
+                            partLenght++;
                         }
-                        if (this.text.charAt(pos) == '.') {
-                            if (Character.isDigit(this.text.charAt(pos + 1))) {
-
-                                documentInsertNextChar(styles.get("Number"));
-                                while (String.valueOf(this.text.charAt(pos)).matches("[0-9A-F_']")) {
-
-                                    documentInsertNextChar(styles.get("Number"));
+                        if (this.text.charAt(position()) == '.') {
+                            if (Character.isDigit(this.text.charAt(position() + 1))) {
+                                partLenght++;
+                                while (String.valueOf(this.text.charAt(position())).matches("[0-9A-F_']")) {
+                                    partLenght++;
                                 }
                             }
                         }
-                        if (this.text.charAt(pos) == 'e') {
-
+                        if (this.text.charAt(position()) == 'e') {
                             documentInsertNextChar(styles.get("Number"));
-                            while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-
-                                documentInsertNextChar(styles.get("Number"));
+                            while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
+                                partLenght++;
                             }
-                        } else if (this.text.charAt(pos) == 'p') {
-
+                        } else if (this.text.charAt(position()) == 'p') {
                             documentInsertNextChar(styles.get("Number"));
-                            while (String.valueOf(this.text.charAt(pos)).matches("[0-9A-F_']")) {
-
-                                documentInsertNextChar(styles.get("Number"));
+                            while (String.valueOf(this.text.charAt(position())).matches("[0-9A-F_']")) {
+                                partLenght++;
                             }
                         }
+                        documentInsertNextString(styles.get("Number"));
                         continue testValues;
-                    } else if (this.text.charAt(pos) == 'o') {
+                    } else if (this.text.charAt(position()) == 'o') {
                         // // base 8
-                        documentInsertNextChar(styles.get("Number"));
+                        partLenght=2;
 
-                        while (String.valueOf(this.text.charAt(pos)).matches("[0-7_']")) {
-
-                            documentInsertNextChar(styles.get("Number"));
+                        while (String.valueOf(this.text.charAt(position())).matches("[0-7_']")) {
+                            partLenght++;
                         }
-                        if (this.text.charAt(pos) == '.') {
-                            if (Character.isDigit(this.text.charAt(pos + 1))) {
-
-                                documentInsertNextChar(styles.get("Number"));
-                                while (String.valueOf(this.text.charAt(pos)).matches("[0-7_']")) {
-                                    documentInsertNextChar(styles.get("Number"));
+                        if (this.text.charAt(position()) == '.') {
+                            if (Character.isDigit(this.text.charAt(position() + 1))) {
+                                partLenght++;
+                                while (String.valueOf(this.text.charAt(position())).matches("[0-7_']")) {
+                                    partLenght++;
                                 }
                             }
                         }
-                        if (this.text.charAt(pos) == 'e') {
-                            documentInsertNextChar(styles.get("Number"));
-                            while (String.valueOf(this.text.charAt(pos)).matches("[0-9_']")) {
-                                documentInsertNextChar(styles.get("Number"));
+                        if (this.text.charAt(position()) == 'e') {
+                            partLenght++;
+                            while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
+                                partLenght++;
                             }
-                        } else if (this.text.charAt(pos) == 'p') {
-                            documentInsertNextChar(styles.get("Number"));
-                            while (String.valueOf(this.text.charAt(pos)).matches("[0-7_']")) {
-                                documentInsertNextChar(styles.get("Number"));
+                        } else if (this.text.charAt(position()) == 'p') {
+                            partLenght++;
+                            while (String.valueOf(this.text.charAt(position())).matches("[0-7_']")) {
+                                partLenght++;
                             }
                         }
+                        documentInsertNextString(styles.get("Number"));
                         continue testValues;
                     }
                 }
@@ -419,26 +425,21 @@ public class SyntaxHighlighter {
                             || Character.isDigit(this.text.charAt(pos))
                             || (this.text.charAt(pos) == '_') || (this.text.charAt(pos) == '\''))) {
                         {
-                            int x = 0;
-                            while ((Character.isLetter(this.text.charAt(pos + x)))
-                                    || Character.isDigit(this.text.charAt(pos + x))
-                                    || (this.text.charAt(pos + x) == '_')
-                                    || (this.text.charAt(pos + x) == '\'')
-                                    || (this.text.charAt(pos + x) == ' ')) {
-                                x++;
+                            partLenght = 0;
+                            while ((Character.isLetter(this.text.charAt(position())))
+                                    || Character.isDigit(this.text.charAt(position()))
+                                    || (this.text.charAt(position()) == '_')
+                                    || (this.text.charAt(position()) == '\'')
+                                    || (this.text.charAt(position()) == ' ')) {
+                                partLenght++;
                             }
-                            if (this.text.charAt(pos + x) == '(') {
+                            if (this.text.charAt(position()) == '(') {
                                 tempStyle = styles.get("Function");
                             } else {
                                 tempStyle = styles.get("Variable");
                             }
                         }
-                        while ((Character.isLetter(this.text.charAt(pos)))
-                                || Character.isDigit(this.text.charAt(pos))
-                                || (this.text.charAt(pos) == '_') || (this.text.charAt(pos) == '\'')) {
-
-                            documentInsertNextChar(tempStyle);
-                        }
+                        documentInsertNextString(tempStyle);
                         continue testValues;
                     }
                     documentInsertNextChar(styles.get("Text"));
