@@ -1,3 +1,7 @@
+##version 0.12.0
+* **feature: theme** MonokaiLight
+* **feature: theme** MonokaiDark
+
 ##version 0.11.0
 * **optimization**
 
