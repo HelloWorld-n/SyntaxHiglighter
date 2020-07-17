@@ -1,3 +1,7 @@
+##version 0.13.0
+* **bigfix** some numbers wrong higlighted
+
+
 ##version 0.12.0
 * **feature: theme** MonokaiLight
 * **feature: theme** MonokaiDark
