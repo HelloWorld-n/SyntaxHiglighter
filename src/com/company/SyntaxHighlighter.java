@@ -338,12 +338,11 @@ public class SyntaxHighlighter {
 
                 if (Character.isDigit(this.text.charAt(pos))) {
                     partLenght = 1;
-                    if (Character.isDigit(this.text.charAt(position())) || this.text.charAt(position()) == '.') {
+                    if (String.valueOf(this.text.charAt(position())).matches("[0-9_'.e]")) {
                         // base 10
                         while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
                             partLenght++;
                         }
-
                         if (this.text.charAt(position()) == '.') {
                             if (Character.isDigit(this.text.charAt(position() + 1))) {
                                 partLenght++;
@@ -352,14 +351,12 @@ public class SyntaxHighlighter {
                                 }
                             }
                         }
-                        if (this.text.charAt(pos) == 'e') {
+                        if (this.text.charAt(position()) == 'e') {
                             partLenght++;
                             while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
                                 partLenght++;
                             }
                         }
-                        documentInsertNextString(styles.get("Number"));
-                        continue testValues;
                     } else if (this.text.charAt(position()) == 'x') {
 
                         // // base 16
@@ -376,18 +373,16 @@ public class SyntaxHighlighter {
                             }
                         }
                         if (this.text.charAt(position()) == 'e') {
-                            documentInsertNextChar(styles.get("Number"));
+                            partLenght++;
                             while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
                                 partLenght++;
                             }
                         } else if (this.text.charAt(position()) == 'p') {
-                            documentInsertNextChar(styles.get("Number"));
+                            partLenght++;
                             while (String.valueOf(this.text.charAt(position())).matches("[0-9A-F_']")) {
                                 partLenght++;
                             }
                         }
-                        documentInsertNextString(styles.get("Number"));
-                        continue testValues;
                     } else if (this.text.charAt(position()) == 'o') {
                         // // base 8
                         partLenght=2;
@@ -414,10 +409,11 @@ public class SyntaxHighlighter {
                                 partLenght++;
                             }
                         }
-                        documentInsertNextString(styles.get("Number"));
-                        continue testValues;
                     }
+                    documentInsertNextString(styles.get("Number"));
+                    continue testValues;
                 }
+
                 {
                     // variables
                     Style tempStyle;
