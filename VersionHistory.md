@@ -1,3 +1,8 @@
+##version 0.14.0
+* **feature: theme** NightOwlLight
+* **feature: theme** NightOwlDark
+
+
 ##version 0.13.0
 * **bigfix** some numbers wrong higlighted
 
