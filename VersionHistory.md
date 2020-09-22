@@ -1,3 +1,7 @@
+##version 0.15.0
+* **feature: theme** Dracula
+
+
 ##version 0.14.0
 * **feature: theme** NightOwlLight
 * **feature: theme** NightOwlDark
