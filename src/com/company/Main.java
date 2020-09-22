@@ -99,7 +99,7 @@ public class Main {
             try {
                 JFileChooser fc = new JFileChooser(new FileSystemView() {
                     @Override
-                    public File createNewFolder(File containingDir) throws IOException {
+                    public File createNewFolder(File containingDir) {
                         return null;
                     }
 
