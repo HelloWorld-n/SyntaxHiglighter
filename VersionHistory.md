@@ -1,3 +1,8 @@
+##version 0.16.0
+* **refractor**
+* **tweak** Default theme changed to "Dracula".
+   * It will not affect your current theme even i never changed.
+
 ##version 0.15.0
 * **feature: theme** Dracula
 
