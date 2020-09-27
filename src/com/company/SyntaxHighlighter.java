@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SyntaxHighlighter {
-    private static final String formatText = "<html><style>body{color:#EEEEEE;margin-left: 10px}  .comment {\n    color: #888888;\n}\n\n.escape {\n    color: #7766FF;\n}\n\n.string {\n    color: #44DD44;\n}\n\n\n\n\n\n.number {\n    color: #EE8800;\n}\n\n.boolean {\n    color: #EE8800;\n}\n\n.builtin-type {\n    color: #CCCC44;\n}\n\n.type {\n    color: #CCCC44;\n}\n\n.variable {\n    color: #DD5555;\n}\n\n.function {\n    color: #22AAFF;\n}\n\n.keyword {\n    color: #9955CC;\n}\n\n</style><body>";
-
     private Map<String, Object> colors = new HashMap<>();
     private Map<String, Style> styles = new HashMap<>();
     private final StyleContext sc = new StyleContext();
@@ -54,7 +52,9 @@ public class SyntaxHighlighter {
             @Override
             public void keyReleased(KeyEvent e) {
                 int caretPosition = textPane.getCaretPosition();
-                setText(textPane.getText());
+                textPane.setText(textSimplify(textPane.getText()));
+                text = textPane.getText();
+                highlight();
                 try {
                     if (e.getKeyChar() == KeyEvent.VK_TAB) {
                         textPane.setCaretPosition(caretPosition + (tabSize - 1));
@@ -150,11 +150,6 @@ public class SyntaxHighlighter {
 
     public void setText(String text) {
         text = textSimplify(text);
-        try {
-            doc.remove(0, doc.getLength());
-        } catch (BadLocationException ble) {
-            System.out.println("Documents are weird!");
-        }
         this.text = text;
         this.highlight();
     }
@@ -224,11 +219,13 @@ public class SyntaxHighlighter {
     }
 
     public void highlight(){
-        text = textSimplify(text);
         highlight(0, text.length());
     }
 
     public void highlight(int offset, int length) {
+        try {
+            doc.remove(offset, length);
+        }catch (BadLocationException badLocationException){}
 
 
         /*

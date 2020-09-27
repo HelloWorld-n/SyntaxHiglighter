@@ -233,6 +233,7 @@ public class Main {
         lines.setBackground(colorBackground);
         lines.setForeground(colorForeground);
         textPane.setBackground(colorBackground);
+        textPane.setForeground(colorForeground);
         btnLoadFile.setBackground(colorBackground);
         btnLoadFile.setHoverBackground(colorBackground);
         btnLoadFile.setPressedBackground(colorBackgroundPressed);
@@ -291,7 +292,7 @@ public class Main {
             if (settings.containsKey("theme")) {
                 themeName = settings.get("theme").toString();
             } else {
-                themeName = "DefaultDark";
+                themeName = "Dracula";
             }
         } catch (IOException ex) {
             ex.printStackTrace();
