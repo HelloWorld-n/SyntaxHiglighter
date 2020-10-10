@@ -55,6 +55,7 @@ public class SyntaxHighlighter {
                 textPane.setText(textSimplify(textPane.getText()));
                 text = textPane.getText();
                 highlight();
+
                 try {
                     if (e.getKeyChar() == KeyEvent.VK_TAB) {
                         textPane.setCaretPosition(caretPosition + (tabSize - 1));
