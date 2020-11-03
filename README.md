@@ -1,6 +1,6 @@
 ### Original Syntax highlighter for ShapedLikeItSelf_script
-current_version: version 0.16.0\
-extension: `.slis`
+current_version: version 0.17.0\
+extension: `.slis` *(maybe)*
 
 Known bugs:
 * backostrophe string nesting may not be higlighted properly
