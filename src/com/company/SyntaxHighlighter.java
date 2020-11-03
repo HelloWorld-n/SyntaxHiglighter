@@ -145,7 +145,6 @@ public class SyntaxHighlighter {
     public String textSimplify(String text){
         text = text.replaceAll("\\r\\n", "\n");
         text = text.replaceAll("\\r", "\n");
-        text = text.replaceAll("\\t", this.tabString);
         return text;
     }
 
@@ -240,33 +239,16 @@ public class SyntaxHighlighter {
             while ( pos < offset + length) {
 
                 // strings
-                // TODO: If editing this, edit in {strings alternative}
-                if (this.text.charAt(pos) == '"') {
+                if ((this.text.charAt(pos) == '"') || (this.text.charAt(pos) == '`')) {
+                    char stringDelimiter = this.text.charAt(pos);
                     documentInsertNextChar(styles.get("String"));
-                    while ((this.text.charAt(pos) != '"')) {
+                    while ((this.text.charAt(pos) != stringDelimiter)) {
                         while (this.text.charAt(pos) == '\\') {
                             documentInsertNextChar(styles.get("StringEscape"));
                             documentInsertNextChar(styles.get("StringEscape"));
                         }
-                        if (this.text.charAt(pos) != '"') {
-                            documentInsertNextChar(styles.get("String"));
-                        }
-                    }
-                    documentInsertNextChar(styles.get("String"));
-                    continue testValues;
-                }
-                // strings alternative
-                if (this.text.charAt(pos) == '`') {
-                    documentInsertNextChar(styles.get("String"));
-                    while ((this.text.charAt(pos) != '`')) {
-                        while ((this.text.charAt(pos) == '\\')
-                                || (this.text.charAt(pos) == '$')
-                                && (this.text.charAt(pos + 1) == '{')) {
-                            if (this.text.charAt(pos) == '\\') {
-                                partLenght = 2;
-                                documentInsertNextString(styles.get("StringEscape"));
-                            }
-                            if (this.text.charAt(pos) == '$') {
+                        if (stringDelimiter == '`'){
+                            if ((this.text.charAt(pos) == '$') && (this.text.charAt(pos+1) == '{')) {
                                 partLenght = 1;
                                 while (this.text.charAt(position()) != '}') {
                                     partLenght++;
@@ -274,15 +256,10 @@ public class SyntaxHighlighter {
                                 partLenght++;
                                 documentInsertNextString(styles.get("Variable"));
                             }
-                            if (this.text.charAt(pos) == '`') {
-                                documentInsertNextChar(styles.get("String"));
-                                continue testValues;
-                            }
                         }
-                        if (this.text.charAt(pos) != '`') {
+                        if (this.text.charAt(pos) != stringDelimiter) {
                             documentInsertNextChar(styles.get("String"));
                         }
-
                     }
                     documentInsertNextChar(styles.get("String"));
                     continue testValues;
@@ -301,7 +278,7 @@ public class SyntaxHighlighter {
                 if ((this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '/')) {
 
                     partLenght = 1;
-                    while (this.text.charAt(position()) != '\n') {
+                    while ((this.text.charAt(position()) != '\n')) {
                         partLenght++;
                     }
                     documentInsertNextString(styles.get("Comment"));
