@@ -29,12 +29,24 @@ public class Main {
         try {
             font = Font.createFont(
                     Font.TRUETYPE_FONT,
-                    new File("src/com/company/Fonts/JetBrainsMono-Regular.ttf")).deriveFont(Font.PLAIN,12);
+                    new File(
+                            "src/com/company/Fonts/JetBrainsMono-Regular.ttf"
+                    )
+            ).deriveFont(Font.PLAIN,12f);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
 
+        GraphicsEnvironment ge =
+                GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try {
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/com/company/Fonts/JetBrainsMono-Regular.ttf")));
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     static private String themeName = "{}";
     static JFrame frame = new JFrame("SyntaxHiglighter");
