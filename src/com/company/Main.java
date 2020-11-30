@@ -37,10 +37,9 @@ public class Main {
             e.printStackTrace();
         }
 
-        GraphicsEnvironment ge =
-                GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
-            ge.registerFont(font);
+        ge.registerFont(font);
 
     }
 
