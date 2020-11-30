@@ -39,11 +39,9 @@ public class Main {
 
         GraphicsEnvironment ge =
                 GraphicsEnvironment.getLocalGraphicsEnvironment();
-        try {
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/com/company/Fonts/JetBrainsMono-Regular.ttf")));
-        } catch (FontFormatException | IOException e) {
-            e.printStackTrace();
-        }
+
+            ge.registerFont(font);
+
     }
 
 
