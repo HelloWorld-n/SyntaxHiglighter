@@ -170,24 +170,23 @@ public class SyntaxHighlighter {
 		return bagBegin + marble + bagEnd;
 	}
 
-	private final String[] slisKeywords = new String[]{
+
+
+	private static final String[] slisBoolValues = new String[]{
+			"false", "true", "undefined",
+	};
+
+	private static final String[] slisClassDeterminators = new String[]{
+			"type", "class", "namespace", "new",
+	};
+
+	private static final String[] slisKeywords = new String[]{
 			"if", "else", "for", "in", "of", "while",
-			"let", "var", "function", "static", "yield",
-			"try", "catch", "finally", "throw", "return",
+			"let", "var", "function", "static", "dynamic",
+			"try", "catch", "finally", "throw", "return", "yield",
 			"this", "switch", "case", "default", "step",
-			// boolean
-			"false", "true", "undefined",
-			// classes
-			"class", "namespace", "new",
 	};
 
-	private final String[] slisBoolValues = new String[]{
-			"false", "true", "undefined",
-	};
-
-	private final String[] slisClassDeterminators = new String[]{
-			"class", "namespace", "new",
-	};
 
 	public void insert(String insertText) {
 		this.text = insert(this.text, insertText, pos);
@@ -291,25 +290,27 @@ public class SyntaxHighlighter {
 					continue testValues;
 				}
 				// keywords
-				for (var item : slisKeywords) {
-					if (this.text.startsWith(item, pos)) {
-						char afterEnd = this.text.charAt(pos + item.length());
-						if (!Character.isLetter(afterEnd) && !Character.isDigit(afterEnd) &&
-								afterEnd != '_' && afterEnd != '\'') {
-							if (Arrays.asList(slisBoolValues).contains(item)) {
-								doc.insertString(pos, item, styles.get("Boolean"));
-							} else {
-								doc.insertString(pos, item, styles.get("Keyword"));
-							}
-							pos += item.length();
-							if (Arrays.asList(slisClassDeterminators).contains(item)) {
+				for (var list : new String[][]{slisKeywords, slisBoolValues, slisClassDeterminators}) {
+					for(var item:list) {
+						if (this.text.startsWith(item, pos)) {
+							char afterEnd = this.text.charAt(pos + item.length());
+							if (!Character.isLetter(afterEnd) && !Character.isDigit(afterEnd) &&
+									afterEnd != '_' && afterEnd != '\'') {
+								if (Arrays.asList(slisBoolValues).contains(item)) {
+									doc.insertString(pos, item, styles.get("Boolean"));
+								} else {
+									doc.insertString(pos, item, styles.get("Keyword"));
+								}
+								pos += item.length();
+								if (Arrays.asList(slisClassDeterminators).contains(item)) {
 
-								while ((Character.isLetter(this.text.charAt(pos)))
-										|| Character.isDigit(this.text.charAt(pos))
-										|| (this.text.charAt(pos) == '_')
-										|| (this.text.charAt(pos) == ' ')
-										|| (this.text.charAt(pos) == '\'')) {
-									documentInsertNextChar(styles.get("Type"));
+									while ((Character.isLetter(this.text.charAt(pos)))
+											|| Character.isDigit(this.text.charAt(pos))
+											|| (this.text.charAt(pos) == '_')
+											|| (this.text.charAt(pos) == ' ')
+											|| (this.text.charAt(pos) == '\'')) {
+										documentInsertNextChar(styles.get("Type"));
+									}
 								}
 							}
 						}
