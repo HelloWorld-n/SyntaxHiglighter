@@ -10,7 +10,7 @@
     Number: 0xbd93f9,
     Boolean: 0xbd93f9,
     BuiltinType: 0x8be9fd,
-    Type: 0x50fa7b,
+    Type:  0x8be9fd,
     Variable: 0xffb86c,
     Function: 0x50fa7b,
     Keyword: 0xff79c6,

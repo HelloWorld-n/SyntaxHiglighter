@@ -1,3 +1,7 @@
+##version 0.20##
+* More keywords
+* Less descriptive versioning sysem
+
 ##version 0.19##
 * Theme "dracula" tweaked.
 * Added {`public`, `protected`, `private`} on keyword list.

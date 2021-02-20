@@ -178,10 +178,11 @@ public class SyntaxHighlighter {
 
 	private static final String[] slisKeywords = new String[]{
 			"if", "else", "for", "in", "of", "while",
+			"switch", "case", "default", "step",
 			"let", "var", "function", "static", "dynamic",
 			"try", "catch", "finally", "throw", "return", "yield",
-			"this", "switch", "case", "default", "step",
 			"private", "protected", "public",
+			"this", "void", "null", "old",
 	};
 
 
