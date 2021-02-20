@@ -57,11 +57,7 @@ public class SyntaxHighlighter {
 				highlight();
 
 				try {
-					if (e.getKeyChar() == KeyEvent.VK_TAB) {
-						textPane.setCaretPosition(caretPosition + (tabSize - 1));
-					} else {
-						textPane.setCaretPosition(caretPosition);
-					}
+					textPane.setCaretPosition(caretPosition);
 				} catch (IllegalArgumentException illegalArgumentException) {
 
 				}
@@ -185,6 +181,7 @@ public class SyntaxHighlighter {
 			"let", "var", "function", "static", "dynamic",
 			"try", "catch", "finally", "throw", "return", "yield",
 			"this", "switch", "case", "default", "step",
+			"private", "protected", "public",
 	};
 
 

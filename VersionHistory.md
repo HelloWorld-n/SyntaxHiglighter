@@ -1,3 +1,8 @@
+##version 0.19##
+* Theme "dracula" tweaked.
+* Added {`public`, `protected`, `private`} on keyword list.
+* **bugfix**: tab no longer acts weird.
+
 ##version 0.18.0##
 * `type` is now keyword
 * `dynamic` is now keyword
