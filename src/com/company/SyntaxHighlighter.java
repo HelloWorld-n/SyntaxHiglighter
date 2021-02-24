@@ -389,8 +389,38 @@ public class SyntaxHighlighter {
 								partLenght++;
 							}
 						}
+					} else if (this.text.charAt(position()) == 'b') {
+						// // base 2
+						partLenght = 2;
+
+						while (String.valueOf(this.text.charAt(position())).matches("[0-1_']")) {
+							partLenght++;
+						}
+						if (this.text.charAt(position()) == '.') {
+							if (Character.isDigit(this.text.charAt(position() + 1))) {
+								partLenght++;
+								while (String.valueOf(this.text.charAt(position())).matches("[0-1_']")) {
+									partLenght++;
+								}
+							}
+						}
+						if (this.text.charAt(position()) == 'e') {
+							partLenght++;
+							while (String.valueOf(this.text.charAt(position())).matches("[0-9_']")) {
+								partLenght++;
+							}
+						} else if (this.text.charAt(position()) == 'p') {
+							partLenght++;
+							while (String.valueOf(this.text.charAt(position())).matches("[0-1_']")) {
+								partLenght++;
+							}
+						}
 					}
+
 					documentInsertNextString(styles.get("Number"));
+					if(String.valueOf(this.text.charAt(position())).matches("[0-9]")){
+						documentInsertNextChar(styles.get("Error"));
+					}
 					continue testValues;
 				}
 

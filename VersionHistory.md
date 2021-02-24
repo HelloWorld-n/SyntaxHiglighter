@@ -1,8 +1,12 @@
-##version 0.20##
+##version 0.21.0##
+* **feature** binary
+* **bugfix** binary, octal
+
+##version 0.20.0##
 * More keywords
 * Less descriptive versioning sysem
 
-##version 0.19##
+##version 0.19.0##
 * Theme "dracula" tweaked.
 * Added {`public`, `protected`, `private`} on keyword list.
 * **bugfix**: tab no longer acts weird.

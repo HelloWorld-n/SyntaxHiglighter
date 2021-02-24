@@ -1,5 +1,5 @@
 ### Original Syntax highlighter for ShapedLikeItSelf_script
-current_version: version 0.20.0\
+current_version: version 0.21.0\
 extension: `.slis` *(maybe)*
 extension: `.sliss` *(maybe)*
 extension: `.tinira` *(short for "tinira (short for \\"this is not infinitely recursive acronym\\") is not infinitely recursice acronym")*
