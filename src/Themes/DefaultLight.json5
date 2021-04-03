@@ -1,0 +1,18 @@
+{
+    Background: 0xDDDDEE,
+    BackgroundPressed: 0xAAAADD,
+    Foreground: 0x444455,
+    Text: 0x444444,
+    Comment: 0x888888,
+    CommentEscape:0x7766FF,
+    String: 0x44DD44,
+    StringEscape: 0x7766FF,
+    Number: 0xEE8800,
+    Boolean: 0xEE8800,
+    BuiltinType: 0xCCCC44,
+    Type: 0xCCCC44,
+    Variable: 0xDD5555,
+    Function: 0x22AAFF,
+    Keyword: 0x9955FF,
+    Preprocessor: 0x9955FF,
+}
