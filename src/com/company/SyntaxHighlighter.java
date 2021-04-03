@@ -167,12 +167,24 @@ public class SyntaxHighlighter {
 	}
 
 
+	private static String[] slisBuiltinTypes = new String[]{
+		"Boolean",
+		"Integer", "Float", "Number",
+		"Char", "String",
+		"Set", "Interval", "List", "Dictionary",
+		"Pointer", "Expression",
+		"Object", "Function", "Type", "System",
+	};
+	
+	private static String[] slisTypes = new String[]{
+		
+	};
 
 	private static final String[] slisBoolValues = new String[]{
 			"false", "true", "undefined",
 	};
 
-	private static final String[] slisClassDeterminators = new String[]{
+	private static final String[] slisTypeDeterminators = new String[]{
 			"type", "class", "namespace", "new",
 	};
 
@@ -246,10 +258,6 @@ public class SyntaxHighlighter {
 					char stringDelimiter = this.text.charAt(pos);
 					documentInsertNextChar(styles.get("String"));
 					while ((this.text.charAt(pos) != stringDelimiter)) {
-						while (this.text.charAt(pos) == '\\') {
-							documentInsertNextChar(styles.get("StringEscape"));
-							documentInsertNextChar(styles.get("StringEscape"));
-						}
 						if (stringDelimiter == '`') {
 							if ((this.text.charAt(pos) == '$') && (this.text.charAt(pos + 1) == '{')) {
 								partLenght = 1;
@@ -259,6 +267,10 @@ public class SyntaxHighlighter {
 								partLenght++;
 								documentInsertNextString(styles.get("Variable"));
 							}
+						}
+						while (this.text.charAt(pos) == '\\') {
+							documentInsertNextChar(styles.get("StringEscape"));
+							documentInsertNextChar(styles.get("StringEscape"));
 						}
 						if (this.text.charAt(pos) != stringDelimiter) {
 							documentInsertNextChar(styles.get("String"));
@@ -288,7 +300,7 @@ public class SyntaxHighlighter {
 					continue testValues;
 				}
 				// keywords
-				for (var list : new String[][]{slisKeywords, slisBoolValues, slisClassDeterminators}) {
+				for (var list : new String[][]{slisKeywords, slisBoolValues, slisTypeDeterminators, slisBuiltinTypes, slisTypes}) {
 					for(var item:list) {
 						if (this.text.startsWith(item, pos)) {
 							char afterEnd = this.text.charAt(pos + item.length());
@@ -296,11 +308,15 @@ public class SyntaxHighlighter {
 									afterEnd != '_' && afterEnd != '\'') {
 								if (Arrays.asList(slisBoolValues).contains(item)) {
 									doc.insertString(pos, item, styles.get("Boolean"));
+								} else if (Arrays.asList(slisBuiltinTypes).contains(item)){
+									doc.insertString(pos, item, styles.get("BuiltinType"));
+								} else if (Arrays.asList(slisTypes).contains(item)){
+									doc.insertString(pos, item, styles.get("BuiltinType"));
 								} else {
 									doc.insertString(pos, item, styles.get("Keyword"));
 								}
 								pos += item.length();
-								if (Arrays.asList(slisClassDeterminators).contains(item)) {
+								if (Arrays.asList(slisTypeDeterminators).contains(item)) {
 
 									while ((Character.isLetter(this.text.charAt(pos)))
 											|| Character.isDigit(this.text.charAt(pos))
@@ -310,6 +326,7 @@ public class SyntaxHighlighter {
 										documentInsertNextChar(styles.get("Type"));
 									}
 								}
+								
 							}
 						}
 					}
@@ -435,8 +452,7 @@ public class SyntaxHighlighter {
 							while ((Character.isLetter(this.text.charAt(position())))
 									|| Character.isDigit(this.text.charAt(position()))
 									|| (this.text.charAt(position()) == '_')
-									|| (this.text.charAt(position()) == '\'')
-									|| (this.text.charAt(position()) == ' ')) {
+									|| (this.text.charAt(position()) == '\'')) {
 								partLenght++;
 							}
 							if (this.text.charAt(position()) == '(') {

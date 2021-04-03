@@ -30,17 +30,19 @@ public class Main {
 			font = Font.createFont(
 					Font.TRUETYPE_FONT,
 					new File(
-							"src/com/company/Fonts/JetBrainsMono-Regular.ttf"
+							System.getProperty("user.dir") + "/com/company/Fonts/JetBrainsMono-Regular.ttf"
 					)
-			).deriveFont(Font.PLAIN, 12f);
+			).deriveFont(Font.PLAIN, 15f);
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
 
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-		ge.registerFont(font);
-
+		try{
+			ge.registerFont(font);
+		}catch(Exception exception){
+			exception.printStackTrace();
+		}
 	}
 
 
@@ -60,7 +62,7 @@ public class Main {
 	static JButtonCustom btnLoadFile = new JButtonCustom(designButton + "<body>Load file</body>");
 	static JButtonCustom btnSaveFile = new JButtonCustom(designButton + "<body>Save file</body>");
 	static JButtonCustom btnSetTheme = new JButtonCustom(designButton + "<body>Set theme</body>");
-	static final JFileChooser fc = new JFileChooser("c:/Users/User/Desktop");
+	static final JFileChooser fc = new JFileChooser("~");
 	static final SyntaxHighlighter syntaxHighlighter = new SyntaxHighlighter(textPane);
 	static String text = "";
 
@@ -125,7 +127,7 @@ public class Main {
 						return null;
 					}
 				});
-				fc.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/Themes"));
+				fc.setCurrentDirectory(new File(System.getProperty("user.dir") + "/Themes"));
 				int returnVal = fc.showDialog(frame, "Set theme");
 				File file = fc.getSelectedFile();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -133,7 +135,7 @@ public class Main {
 					loadTheme(text);
 				}
 
-				File settingsFile = new File(System.getProperty("user.dir") + "/src/.settings.json5");
+				File settingsFile = new File(System.getProperty("user.dir") + "/.settings.json5");
 				String settingsText = Files.readString(Paths.get(settingsFile.getAbsolutePath()));
 				Map<String, Object> settings = TnJson.parse(settingsText);
 				settings.put("theme", file.getName().replaceAll("\\..*", ""));
@@ -160,7 +162,7 @@ public class Main {
 
 	public static void loadThemeFromThemeFile(String themeName) {
 		String stringTheme = "{}";
-		File file = new File(System.getProperty("user.dir") + "/src/Themes/" + themeName + ".json5");
+		File file = new File(System.getProperty("user.dir") + "/Themes/" + themeName + ".json5");
 		try {
 			stringTheme = Files.readString(Paths.get(file.getAbsolutePath()));
 		} catch (Exception ex) {
@@ -299,7 +301,7 @@ public class Main {
 
 
 	private static void applySettings() {
-		File settingsFile = new File(System.getProperty("user.dir") + "/src/.settings.json5");
+		File settingsFile = new File(System.getProperty("user.dir") + "/.settings.json5");
 		try {
 			String settingsText = Files.readString(Paths.get(settingsFile.getAbsolutePath()));
 
@@ -316,6 +318,10 @@ public class Main {
 
 
 	public static void main(String[] args) {
+		System.setProperty("Dawt.useSystemAAFontSettings", "on");
+		System.setProperty("Dswing.aatext", "true");
+		System.setProperty("awt.useSystemAAFontSettings", "on");
+		System.setProperty("swing.aatext", "true");
 		applySettings();
 		loadThemeFromThemeFile(themeName);
 		initializeElements();
