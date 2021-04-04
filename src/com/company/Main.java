@@ -30,7 +30,7 @@ public class Main {
 			font = Font.createFont(
 					Font.TRUETYPE_FONT,
 					new File(
-							System.getProperty("user.dir") + "/com/company/Fonts/JetBrainsMono-Regular.ttf"
+							System.getProperty("user.dir") + "/src/com/company/Fonts/JetBrainsMono-Regular.ttf"
 					)
 			).deriveFont(Font.PLAIN, 15f);
 		} catch (FontFormatException | IOException e) {
@@ -127,7 +127,7 @@ public class Main {
 						return null;
 					}
 				});
-				fc.setCurrentDirectory(new File(System.getProperty("user.dir") + "/Themes"));
+				fc.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/Themes"));
 				int returnVal = fc.showDialog(frame, "Set theme");
 				File file = fc.getSelectedFile();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -135,7 +135,7 @@ public class Main {
 					loadTheme(text);
 				}
 
-				File settingsFile = new File(System.getProperty("user.dir") + "/.settings.json5");
+				File settingsFile = new File(System.getProperty("user.dir") + "/src/.settings.json5");
 				String settingsText = Files.readString(Paths.get(settingsFile.getAbsolutePath()));
 				Map<String, Object> settings = TnJson.parse(settingsText);
 				settings.put("theme", file.getName().replaceAll("\\..*", ""));
@@ -162,7 +162,7 @@ public class Main {
 
 	public static void loadThemeFromThemeFile(String themeName) {
 		String stringTheme = "{}";
-		File file = new File(System.getProperty("user.dir") + "/Themes/" + themeName + ".json5");
+		File file = new File(System.getProperty("user.dir") + "/src/Themes/" + themeName + ".json5");
 		try {
 			stringTheme = Files.readString(Paths.get(file.getAbsolutePath()));
 		} catch (Exception ex) {
@@ -301,7 +301,7 @@ public class Main {
 
 
 	private static void applySettings() {
-		File settingsFile = new File(System.getProperty("user.dir") + "/.settings.json5");
+		File settingsFile = new File(System.getProperty("user.dir") + "/src/.settings.json5");
 		try {
 			String settingsText = Files.readString(Paths.get(settingsFile.getAbsolutePath()));
 

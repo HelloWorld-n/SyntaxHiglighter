@@ -1,3 +1,7 @@
+##version 0.23.0##
+* **bugfix** now intellijIDEA compiles fine again
+* **bugcreate** now problems when compiling manually again
+
 ##version 0.22.0##
 * **changes**, lot of them
 

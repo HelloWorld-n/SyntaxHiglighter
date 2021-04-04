@@ -85,7 +85,7 @@ class JsonSerializer {
     else if (value instanceof Collection) {
       addList((Collection) value, b, builder, level, path);
     }
-    else if (value.getType().isArray()) {
+    else if (value.getClass().isArray()) {
       addArray(value, b, builder, level, path);
     }
     else {
