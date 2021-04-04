@@ -90,7 +90,7 @@ public class SyntaxHighlighter {
 
 	protected void styleizeColors() {
 		for (String item : colorItems) {
-			if (colors.containsKey(item)) {
+		if (colors.containsKey(item)) {
 				sc.getStyle(item).addAttribute(StyleConstants.Foreground, colors.get(item));
 				styles.put(item, sc.getStyle(item));
 			} else if (item.equals("Text")) {
@@ -191,7 +191,7 @@ public class SyntaxHighlighter {
 	private static final String[] slisKeywords = new String[]{
 			"if", "else", "for", "in", "of", "while",
 			"switch", "case", "default", "step",
-			"let", "var", "function", "static", "dynamic", "import"
+			"let", "var", "function", "static", "dynamic", "import",
 			"try", "catch", "finally", "throw", "return", "yield",
 			"private", "protected", "public",
 			"this", "void", "null", "old",
