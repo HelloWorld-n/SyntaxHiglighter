@@ -290,7 +290,13 @@ public class SyntaxHighlighter {
 					documentInsertNextString(styles.get("Comment"));
 					continue testValues;
 				}
-				if ((this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '/')) {
+				if (
+						(
+							(this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '/')
+						) || (
+							this.text.charAt(pos) == '#'
+						)
+				) {
 
 					partLenght = 1;
 					while ((this.text.charAt(position()) != '\n')) {
