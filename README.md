@@ -1,5 +1,5 @@
 ### Original Syntax highlighter for ShapedLikeItSelf_script
-current_version: version 0v0.23.0
+current_version: version 0v0.24.0
 
 Known bugs:
 * backostrophe string nesting may not be higlighted properly

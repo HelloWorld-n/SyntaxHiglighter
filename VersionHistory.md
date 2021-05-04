@@ -1,3 +1,8 @@
+##version 0.24.0##
+* New type of comments
+* * start at "#"
+* * end at NEW_LINE
+
 ##version 0.23.0##
 * **bugfix** now intellijIDEA compiles fine again
 * **bugcreate** now problems when compiling manually again
