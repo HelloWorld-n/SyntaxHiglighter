@@ -291,11 +291,23 @@ public class SyntaxHighlighter {
 					continue testValues;
 				}
 				if (
+					(
 						(
 							(this.text.charAt(pos) == '/') && (this.text.charAt(pos + 1) == '/')
 						) || (
 							this.text.charAt(pos) == '#'
 						)
+					) && (
+						(
+							pos == 0
+						) || (
+							this.text.charAt(pos-1) == '\t'
+						) || (
+							this.text.charAt(pos-1) == '\n'
+						) || (
+							this.text.charAt(pos-1) == '\r'
+						)
+					)
 				) {
 
 					partLenght = 1;
