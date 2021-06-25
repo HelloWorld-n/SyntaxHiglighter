@@ -1,8 +1,8 @@
 ##version 0.25.##
-* Comments now have restrictions
+* **feature** Comments now have restrictions
 
 ##version 0.24.0##
-* New type of comments
+* **feature** New type of comments
 * * start at "#"
 * * end at NEW_LINE
 
