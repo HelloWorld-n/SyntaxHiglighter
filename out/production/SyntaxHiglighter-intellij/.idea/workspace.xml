@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4dfec5fa-b8b0-4366-8edd-3ecfb323d26f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.settings.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SyntaxHiglighter-intellij.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SyntaxHiglighter-intellij.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/ChinolorDark.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/ChinolorLight.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/DefaultDark.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/DefaultLight.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/Dracula.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/MonokaiDark.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/MonokaiLight.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/NightOwlDark.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Themes/NightOwlLight.json5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-Bold-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-ExtraBold-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-ExtraBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-Medium-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Fonts/JetBrainsMono-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/JButtonCustom.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/JButtonCustom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main$FileLoader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main$FileSaver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main$ThemeChanger$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main$ThemeChanger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/SyntaxHighlighter$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/SyntaxHighlighter$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/SyntaxHighlighter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/company/SyntaxHighlighter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/IGetCollection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/IGetCollection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/JsonParser$Path.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/JsonParser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/JsonParser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/JsonSerializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/JsonSerializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/MapNavigator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/ParseException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/ParseException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/SerializeException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/SerializeException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJson$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJson$Mode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJsonBuilder$IPathHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJsonBuilder$ITypeHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJsonBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/com/json5Parser/TnJsonBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/JButtonCustom.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/JButtonCustom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$FileLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$FileLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$FileSaver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$FileSaver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$ThemeChanger$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$ThemeChanger$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$ThemeChanger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main$ThemeChanger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/SyntaxHighlighter$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/SyntaxHighlighter$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/SyntaxHighlighter$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/SyntaxHighlighter$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/SyntaxHighlighter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/company/SyntaxHighlighter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/IGetCollection.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/IGetCollection.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/JsonParser$Path.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/JsonParser$Path.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/JsonParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/JsonParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/JsonSerializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/JsonSerializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/MapNavigator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/MapNavigator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/ParseException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/ParseException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/SerializeException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/SerializeException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJson$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJson$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJson$Mode.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJson$Mode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJson.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJson.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJsonBuilder$IPathHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJsonBuilder$IPathHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJsonBuilder$ITypeHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJsonBuilder$ITypeHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJsonBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SyntaxHiglighter-intellij/com/json5Parser/TnJsonBuilder.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1yJ9XqTzYQn2GXqpszHwIN07jz9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="__name__" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+      <module name="SyntaxHiglighter-intellij" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4dfec5fa-b8b0-4366-8edd-3ecfb323d26f" name="Changes" comment="" />
+      <created>1631958893439</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1631958893439</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
